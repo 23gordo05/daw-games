@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.daw_games.persistence.entities.Game;
+import com.daw_games.persistence.entities.enums.Tipo;
 import com.daw_games.persistence.repositories.GameRepository;
 import com.daw_games.services.exceptions.GameException;
 import com.daw_games.services.exceptions.GameNotFoundException;
@@ -18,7 +19,7 @@ public class GameService {
 	private GameRepository gameRepository;
 	
 	// obtener todos
-	public List<Game> findAll(){
+	public List<Game> findAll() {
 		return this.gameRepository.findAll();
 	}
 	
@@ -30,7 +31,7 @@ public class GameService {
 		return this.gameRepository.findById(id).get();
 	}
 	
-	// crear
+	// crear un juego
 	public Game create(Game game) {
 		game.setId(0);
 		game.setFechaLanzamiento(LocalDate.now());
@@ -73,8 +74,43 @@ public class GameService {
 
 	// marcar/desmarcar completado juego
 	
+	
 	//Buscar juegos por género.
-	public List<Game> findByGenero(String genero){
+	public List<Game> findByGenero(String genero) {
 		return this.gameRepository.findByGeneroContaining(genero);
 	}
+	
+	//Buscar juegos por nombre.
+	public List<Game> findByName(String name) {
+		return this.gameRepository.findByNombreContaining(name);
+	}
+	
+	//Buscar juegos por plataforma.
+	public List<Game> findByPlataformas(String plataforma) {
+		return this.gameRepository.findByPlataformasContaining(plataforma);
+	}
+	
+	//Obtener las expansiones.
+	public List<Game> findByExpansion(Tipo tipo) {
+		return this.gameRepository.findByTipo(Tipo.EXPANSION);
+	}
+	
+	//Obtener los DLCs.
+	public List<Game> findByDlcs(Tipo tipo) {
+		return this.gameRepository.findByTipo(Tipo.DLC);
+	}
+	
+	//Obtener los juegos base.
+	public List<Game> findByBase(Tipo tipo) {
+		return this.gameRepository.findByTipo(Tipo.BASE);
+	}
+	
+	//Buscar juegos en un rango de precios.
+	public List<Game> findByPrecio(double start, double end) {
+		return this.gameRepository.findByPrecioBetween(start, end);
+	}
+	
+	//Mostrar los juegos que tengan más de 1000 descargas.
+	
+
 }

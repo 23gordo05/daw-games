@@ -90,6 +90,5 @@ public class Game {
 	public void setCompletado(Boolean completado) {
 		this.completado = completado;
 	}
-	
-	
+		
 }
