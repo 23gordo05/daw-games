@@ -73,6 +73,9 @@ public class GameController {
 		}
 	}
 	
+	//Marcar/desmarcar un juego como completado.
+	
+	
 	//Buscar juegos por género.
 	@GetMapping("/genero")
 	public ResponseEntity<?> findByGenero(@RequestParam String genero) {
@@ -142,5 +145,14 @@ public class GameController {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(g.getMessage());
 		}
 	}
-
+	
+	// Mostrar los juegos que tengan mas de 10000000 descargas.
+	@GetMapping("/descargas")
+	public ResponseEntity<?> findByDescargas(@PathVariable long descargas,@PathVariable long limite){
+		try {
+			return ResponseEntity.ok(this.gameService.findByDescargas(descargas, limite));
+		} catch (GameException g) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body(g.getMessage());
+		}
+	}
 }

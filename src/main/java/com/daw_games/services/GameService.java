@@ -110,7 +110,9 @@ public class GameService {
 		return this.gameRepository.findByPrecioBetween(start, end);
 	}
 	
-	//Mostrar los juegos que tengan más de 1000 descargas.
-	
+	//Mostrar los juegos que tengan más de 10000000 descargas.
+	public List<Game> findByDescargas(long descargas, long limite) {
+			return this.gameRepository.findByDescargasGreaterThan(descargas, limite);
+	}
 
 }
