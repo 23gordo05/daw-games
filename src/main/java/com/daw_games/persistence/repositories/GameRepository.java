@@ -23,5 +23,5 @@ public interface GameRepository extends ListCrudRepository<Game, Integer>{
 	//Buscar juegos en un rango de precios.
 		List<Game> findByPrecioBetween(double start, double end);
 	// Mostrar los juegos que tengan mas de 10000000 descargas.
-		List<Game> findByDescargasGreaterThan(long descargas, long limite);
+		List<Game> findByDescargasGreaterThan(long descargas);
 }

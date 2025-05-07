@@ -74,7 +74,15 @@ public class GameController {
 	}
 	
 	//Marcar/desmarcar un juego como completado.
-	
+	@PutMapping("/{id}/completar")
+	public ResponseEntity<?> cambiarCompletado(@PathVariable int id) {
+		try {
+			this.gameService.cambiarCompletado(id);
+			return ResponseEntity.ok("El estado a sido cambiado");
+		} catch (GameNotFoundException g) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(g.getMessage());
+		}
+	}
 	
 	//Buscar juegos por género.
 	@GetMapping("/genero")
@@ -138,7 +146,7 @@ public class GameController {
 	
 	//Buscar juegos en un rango de precios.
 	@GetMapping("/precios")
-	public ResponseEntity<?> findByPrecios(@PathVariable double start, @PathVariable double end) {
+	public ResponseEntity<?> findByPrecios(@RequestParam double start, @RequestParam double end) {
 		try {
 			return ResponseEntity.ok(this.gameService.findByPrecio(start, end));
 		} catch (GameException g) {
@@ -148,9 +156,9 @@ public class GameController {
 	
 	// Mostrar los juegos que tengan mas de 10000000 descargas.
 	@GetMapping("/descargas")
-	public ResponseEntity<?> findByDescargas(@PathVariable long descargas,@PathVariable long limite){
+	public ResponseEntity<?> findByDescargas(){
 		try {
-			return ResponseEntity.ok(this.gameService.findByDescargas(descargas, limite));
+			return ResponseEntity.ok(this.gameService.findByDescargas());
 		} catch (GameException g) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(g.getMessage());
 		}

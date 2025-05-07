@@ -35,6 +35,7 @@ public class GameService {
 	public Game create(Game game) {
 		game.setId(0);
 		game.setFechaLanzamiento(LocalDate.now());
+		game.setCompletado(false);
 		
 		return this.gameRepository.save(game);
 	}
@@ -73,7 +74,18 @@ public class GameService {
 	
 
 	// marcar/desmarcar completado juego
-	
+	public boolean cambiarCompletado(int id, Game g) {
+		//find by id	
+		if(g.getCompletado()== true) {
+			g.setCompletado(false);
+		}
+		else {
+			g.setCompletado(true);
+		}
+		
+		return this.
+		
+	}
 	
 	//Buscar juegos por género.
 	public List<Game> findByGenero(String genero) {
@@ -111,8 +123,8 @@ public class GameService {
 	}
 	
 	//Mostrar los juegos que tengan más de 10000000 descargas.
-	public List<Game> findByDescargas(long descargas, long limite) {
-			return this.gameRepository.findByDescargasGreaterThan(descargas, limite);
+	public List<Game> findByDescargas() {
+			return this.gameRepository.findByDescargasGreaterThan(10000000);
 	}
 
 }
