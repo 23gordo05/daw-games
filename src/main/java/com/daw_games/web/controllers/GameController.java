@@ -95,7 +95,7 @@ public class GameController {
 	}
 	
 	// Buscar juegos por nombre.
-	@GetMapping("/name")
+	@GetMapping("/nombre")
 	public ResponseEntity<?> findByName(@RequestParam String name) {
 		try {
 			return ResponseEntity.ok(this.gameService.findByName(name));
@@ -146,7 +146,7 @@ public class GameController {
 	
 	//Buscar juegos en un rango de precios.
 	@GetMapping("/precios")
-	public ResponseEntity<?> findByPrecios(@RequestParam double start, @RequestParam double end) {
+	public ResponseEntity<?> findByPrecios(@RequestParam(defaultValue = "0.0") double start, @RequestParam(defaultValue = "999.99") double end) {
 		try {
 			return ResponseEntity.ok(this.gameService.findByPrecio(start, end));
 		} catch (GameException g) {

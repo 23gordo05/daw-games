@@ -74,8 +74,10 @@ public class GameService {
 	
 
 	// marcar/desmarcar completado juego
-	public boolean cambiarCompletado(int id, Game g) {
-		//find by id	
+	public Game cambiarCompletado(int id) {
+		
+		Game g = this.findById(id);
+		
 		if(g.getCompletado()== true) {
 			g.setCompletado(false);
 		}
@@ -83,7 +85,7 @@ public class GameService {
 			g.setCompletado(true);
 		}
 		
-		return this.
+		return this.gameRepository.save(g);
 		
 	}
 	
